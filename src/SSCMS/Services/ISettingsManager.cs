@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using Datory;
 
 namespace SSCMS.Services
@@ -8,10 +8,14 @@ namespace SSCMS.Services
         string ContentRootPath { get; }
         string WebRootPath { get; }
         string Version { get; }
-        string TargetFramework { get; }
+        string FrameworkDescription { get; }
+        string OSDescription { get; }
+        bool Containerized { get; }
+        int CPUCores { get; }
         bool IsNightlyUpdate { get; }
         bool IsProtectData { get; }
         string SecurityKey { get; }
+        string ApiHost { get; }
         DatabaseType DatabaseType { get; }
         string DatabaseConnectionString { get; }
         IDatabase Database { get; }
@@ -20,5 +24,6 @@ namespace SSCMS.Services
         string Encrypt(string inputString, string securityKey = null);
         string Decrypt(string inputString, string securityKey = null);
         void SaveSettings(bool isNightlyUpdate, bool isProtectData, DatabaseType databaseType, string databaseConnectionString, string redisConnectionString);
+        IServiceProvider BuildServiceProvider();
     }
 }

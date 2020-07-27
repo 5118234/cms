@@ -41,7 +41,7 @@ namespace SSCMS.Core.Repositories
         {
             var query = Q.NewQuery();
 
-            if (groupId > 0)
+            if (groupId != 0)
             {
                 query.Where(nameof(LibraryImage.GroupId), groupId);
             }
@@ -60,7 +60,7 @@ namespace SSCMS.Core.Repositories
                 .OrderByDesc(nameof(LibraryImage.Id))
                 .ForPage(page, perPage);
 
-            if (groupId > 0)
+            if (groupId != 0)
             {
                 query.Where(nameof(LibraryImage.GroupId), groupId);
             }
@@ -90,6 +90,13 @@ namespace SSCMS.Core.Repositories
             return await _repository.GetAsync<string>(Q
                 .Select(nameof(LibraryImage.Url))
                 .Where(nameof(LibraryImage.Title), title)
+            );
+        }
+
+        public async Task<bool> IsExistsAsync(string mediaId)
+        {
+            return await _repository.ExistsAsync(Q
+                .Where(nameof(LibraryImage.MediaId), mediaId)
             );
         }
     }

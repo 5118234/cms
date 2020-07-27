@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using SSCMS.Dto;
-using SSCMS.Core.Extensions;
 using SSCMS.Core.Utils;
+using SSCMS.Extensions;
 using SSCMS.Models;
 using SSCMS.Repositories;
 using SSCMS.Services;
@@ -105,12 +105,12 @@ namespace SSCMS.Web.Controllers.Admin.Settings.Sites
                 }
                 var sitePath = await _pathManager.GetSitePathAsync(request.ParentId);
                 var directories = DirectoryUtils.GetDirectoryNames(sitePath);
-                if (StringUtils.ContainsIgnoreCase(directories, request.SiteDir))
+                if (ListUtils.ContainsIgnoreCase(directories, request.SiteDir))
                 {
                     return this.Error("已存在相同的文件夹，请更改文件夹名称！");
                 }
-                var list = await _siteRepository.GetSiteDirListAsync(request.ParentId);
-                if (StringUtils.ContainsIgnoreCase(list, request.SiteDir))
+                var list = await _siteRepository.GetSiteDirsAsync(request.ParentId);
+                if (ListUtils.ContainsIgnoreCase(list, request.SiteDir))
                 {
                     return this.Error("已存在相同的站点文件夹，请更改文件夹名称！");
                 }
@@ -193,7 +193,7 @@ namespace SSCMS.Web.Controllers.Admin.Settings.Sites
                 var filePath = _pathManager.GetSiteTemplatesPath($"T_{request.CreateTemplateId}.zip");
                 FileUtils.DeleteFileIfExists(filePath);
                 var downloadUrl = OnlineTemplateManager.GetDownloadUrl(request.CreateTemplateId);
-                WebClientUtils.SaveRemoteFileToLocal(downloadUrl, filePath);
+                WebClientUtils.Download(downloadUrl, filePath);
 
                 caching.SetProcess(request.Guid, "模板压缩包下载成功，开始解压缩，可能需要几分钟，请耐心等待...");
 

@@ -6,13 +6,18 @@ namespace SSCMS.Utils
     {
         public const string ConfigFileName = "sscms.json";
         public const string PackageFileName = "package.json";
+        public const string ReadmeFileName = "README.md";
+        public const string ChangeLogFileName = "CHANGELOG.md";
         public const string PluginConfigFileName = "config.json";
         public const string AdminDirectory = "ss-admin";
         public const string HomeDirectory = "home";
+        public const string WwwrootDirectory = "wwwroot";
         public const string PluginsDirectory = "plugins";
         public const string DefaultLanguage = "en";
         public const string DefaultLocalDbFileName = "database.sqlite";
         public const string EncryptStingIndicator = "0secret0";
+        public const string ActionsLoginSuccess = "LoginSuccess";
+        public const string ActionsLoginFailure = "LoginFailure";
 
         public const int AccessTokenExpireDays = 7;
 
@@ -21,8 +26,9 @@ namespace SSCMS.Utils
         public const string ApiPrefix = "/api";
         public const string ApiAdminPrefix = "/api/admin";
         public const string ApiHomePrefix = "/api/home";
+        public const string ApiOpenPrefix = "/api/open";
         public const string ApiV1Prefix = "/api/v1";
-        public const string ApiStlPrefix = "/api/stl";
+        public const string ApiStlPrefix = "/stl";
         public const string RoutePreview = "preview/{siteId}";
         public const string RoutePreviewChannel = "preview/{siteId}/{channelId}";
         public const string RoutePreviewContent = "preview/{siteId}/{channelId}/{contentId}";
@@ -44,12 +50,7 @@ namespace SSCMS.Utils
         public const string ScopeUsers = "Users";
         public const string ScopeStl = "STL";
 
-        public const string OsUserProfileTypeConfig = "config.json";
-        public const string OsUserProfileTypePlugins = "plugins";
-
         public static DateTime SqlMinValue { get; } = new DateTime(1754, 1, 1, 0, 0, 0, 0);
-
-        public const string AdminLogin = "后台管理员登录";
 
         public static string GetSessionIdCacheKey(int userId)
         {
